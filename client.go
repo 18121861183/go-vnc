@@ -7,13 +7,13 @@ import (
 	"strings"
 	"unicode"
 
+	"github.com/18121861183/go-vnc/buttons"
+	"github.com/18121861183/go-vnc/encodings"
+	"github.com/18121861183/go-vnc/keys"
+	"github.com/18121861183/go-vnc/logging"
+	"github.com/18121861183/go-vnc/messages"
+	"github.com/18121861183/go-vnc/rfbflags"
 	"github.com/golang/glog"
-	"github.com/kward/go-vnc/buttons"
-	"github.com/kward/go-vnc/encodings"
-	"github.com/kward/go-vnc/keys"
-	"github.com/kward/go-vnc/logging"
-	"github.com/kward/go-vnc/messages"
-	"github.com/kward/go-vnc/rfbflags"
 )
 
 // SetPixelFormatMessage holds the wire format message.
@@ -60,7 +60,7 @@ type SetEncodingsMessage struct {
 // from the server. After calling this method, the encs slice given should not
 // be modified.
 //
-// TODO(kward:20170306) Fix bad practice of mixing of protocol and internal
+// TODO(18121861183:20170306) Fix bad practice of mixing of protocol and internal
 // state here.
 //
 // See RFC 6143 Section 7.5.2

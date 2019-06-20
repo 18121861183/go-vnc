@@ -5,8 +5,8 @@ package vnc
 import (
 	"fmt"
 
+	"github.com/18121861183/go-vnc/logging"
 	"github.com/golang/glog"
-	"github.com/kward/go-vnc/logging"
 
 	"golang.org/x/net/context"
 )
@@ -173,7 +173,7 @@ func (c *ClientConn) securityHandshake38() error {
 	}
 
 	// Choose client security type.
-	// TODO(kward): try "better" security types first.
+	// TODO(18121861183): try "better" security types first.
 	var auth ClientAuth
 FindAuth:
 	for _, securityType := range securityTypes {
@@ -227,7 +227,7 @@ func (c *ClientConn) securityResultHandshake() error {
 	return nil
 }
 
-// TODO(kward): need a context for timeout
+// TODO(18121861183): need a context for timeout
 func (c *ClientConn) readErrorReason() (string, error) {
 	if logging.V(logging.FnDeclLevel) {
 		glog.Info(logging.FnName())

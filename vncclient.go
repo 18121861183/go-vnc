@@ -10,10 +10,10 @@ import (
 	"net"
 	"reflect"
 
+	"github.com/18121861183/go-vnc/go/metrics"
+	"github.com/18121861183/go-vnc/logging"
+	"github.com/18121861183/go-vnc/messages"
 	"github.com/golang/glog"
-	"github.com/kward/go-vnc/go/metrics"
-	"github.com/kward/go-vnc/logging"
-	"github.com/kward/go-vnc/messages"
 	"golang.org/x/net/context"
 )
 

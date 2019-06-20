@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/kward/go-vnc/go/operators"
+	"github.com/18121861183/go-vnc/go/operators"
 )
 
 func TestBuffer_Read(t *testing.T) {

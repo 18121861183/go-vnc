@@ -10,11 +10,11 @@ import (
 	"net/http"
 )
 
-// TODO(kward): Add the following stats:
+// TODO(18121861183): Add the following stats:
 // - MultiLevel
 //   - MinuteHour
 // - VariableMap
-// TODO(kward): Consider locking.
+// TODO(18121861183): Consider locking.
 
 type Metric interface {
 	// Adjust increments or decrements the metric value.

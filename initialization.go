@@ -5,9 +5,9 @@ package vnc
 import (
 	"io"
 
+	"github.com/18121861183/go-vnc/logging"
+	"github.com/18121861183/go-vnc/rfbflags"
 	"github.com/golang/glog"
-	"github.com/kward/go-vnc/logging"
-	"github.com/kward/go-vnc/rfbflags"
 )
 
 // clientInit implements §7.3.1 ClientInit.
@@ -24,7 +24,7 @@ func (c *ClientConn) clientInit() error {
 		return err
 	}
 
-	// TODO(kward)20170226): VENUE responds with some sort of shared flag
+	// TODO(18121861183)20170226): VENUE responds with some sort of shared flag
 	// response, which includes the VENUE name and IPs. Handle this?
 
 	return nil

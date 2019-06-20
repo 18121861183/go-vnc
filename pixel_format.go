@@ -8,7 +8,7 @@ import (
 	"io"
 	"math"
 
-	"github.com/kward/go-vnc/rfbflags"
+	"github.com/18121861183/go-vnc/rfbflags"
 )
 
 var (

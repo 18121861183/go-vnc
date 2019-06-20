@@ -8,7 +8,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/kward/go-vnc/encodings"
+	"github.com/18121861183/go-vnc/encodings"
 )
 
 //=============================================================================
