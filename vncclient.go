@@ -166,6 +166,10 @@ func (c *ClientConn) DesktopName() string {
 	return c.desktopName
 }
 
+func (c *ClientConn) ProtocolVersion() string {
+	return c.protocolVersion
+}
+
 // setDesktopName stores the server provided desktop name.
 func (c *ClientConn) setDesktopName(name string) {
 	if logging.V(logging.ResultLevel) {
