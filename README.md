@@ -36,6 +36,23 @@ There are two additional files that provide everything else:
 - vncclient.go -- code for instantiating a VNC client
 - common.go -- common stuff not related to the RFB protocol
 
+## Example
+ ```
+nc, err := net.Dial("tcp", "192.168.9.93:5900")
+if err != nil {
+    log.Fatalf("Error connecting to VNC host. %v", err)
+}
+
+// Negotiate connection with the server.
+vcc := vnc.NewClientConfig("11111111")
+vc, version, err := vnc.Connect(context.Background(), nc, vcc)
+
+print(version)
+if err != nil {
+    log.Fatalf("Error negotiating connection to VNC host. %v", err)
+}
+fmt.Println(vc.DesktopName())
+ ```
 
 <!--- Links -->
 [RFC6143]: http://tools.ietf.org/html/rfc6143
