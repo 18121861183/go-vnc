@@ -18,7 +18,7 @@ import (
 )
 
 // Connect negotiates a connection to a VNC server.
-func Connect(ctx context.Context, c net.Conn, cfg *ClientConfig) (*ClientConn, error) {
+func Connect(ctx context.Context, c net.Conn, cfg *ClientConfig) (*ClientConn, string, error) {
 	conn := NewClientConn(c, cfg)
 
 	if err := conn.processContext(ctx); err != nil {
@@ -27,38 +27,38 @@ func Connect(ctx context.Context, c net.Conn, cfg *ClientConfig) (*ClientConn, e
 
 	if err := conn.protocolVersionHandshake(ctx); err != nil {
 		conn.Close()
-		return nil, err
+		return nil, conn.protocolVersion, err
 	}
 	if err := conn.securityHandshake(); err != nil {
 		conn.Close()
-		return nil, err
+		return nil, conn.protocolVersion, err
 	}
 	if err := conn.securityResultHandshake(); err != nil {
 		conn.Close()
-		return nil, err
+		return nil, conn.protocolVersion, err
 	}
 	if err := conn.clientInit(); err != nil {
 		conn.Close()
-		return nil, err
+		return nil, conn.protocolVersion, err
 	}
 	if err := conn.serverInit(); err != nil {
 		conn.Close()
-		return nil, err
+		return nil, conn.protocolVersion, err
 	}
 
 	// Send client-to-server messages.
 	encs := conn.encodings
 	if err := conn.SetEncodings(encs); err != nil {
 		conn.Close()
-		return nil, Errorf("failure calling SetEncodings; %s", err)
+		return nil, conn.protocolVersion, Errorf("failure calling SetEncodings; %s", err)
 	}
 	pf := conn.pixelFormat
 	if err := conn.SetPixelFormat(pf); err != nil {
 		conn.Close()
-		return nil, Errorf("failure calling SetPixelFormat; %s", err)
+		return nil, conn.protocolVersion, Errorf("failure calling SetPixelFormat; %s", err)
 	}
 
-	return conn, nil
+	return conn, conn.protocolVersion, nil
 }
 
 // A ClientConfig structure is used to configure a ClientConn. After
@@ -164,10 +164,6 @@ func (c *ClientConn) Close() error {
 // DesktopName returns the server provided desktop name.
 func (c *ClientConn) DesktopName() string {
 	return c.desktopName
-}
-
-func (c *ClientConn) ProtocolVersion() string {
-	return c.protocolVersion
 }
 
 // setDesktopName stores the server provided desktop name.
